@@ -6,8 +6,15 @@ const mail = xBlog.mail
 const widget = xBlog.widget
 // 一些字段
 const dbFriend = "friend"
+// 管理员邮箱
 const keyAdminEmail = "site_email"
-const keySettingAppFriend = "setting_app_friend"
+// api地址
+const keyServer = 'site_web_server'
+// 友链名字
+const keyFriendName = "friend_name"
+const keyFriendDec = "friend_dec"
+const keyFriendLink = "friend_link"
+const keyFriendAvatar = "friend_avatar"
 
 // 获取所有友链
 router.registerRouter("GET","",function(context){
@@ -88,12 +95,14 @@ widget.addPage({
 })
 
 // 添加友人帐设置界面
+widget.addSetting("友链管理",2,"friend")
 widget.addSetting("友链设置",1,tools.getAdminPluginSetting([
-    {title:"开启友链功能",type: "switch",key: keySettingAppFriend}
+    {title:"友链名字",type: "input",key: keyFriendName},
+    {title:"友链介绍",type: "input",key: keyFriendDec},
+    {title:"友链地址",type: "input",key: keyFriendLink},
+    {title:"友链头像",type: "upload",key: keyFriendAvatar}
 ]))
-widget.addSetting("友链设置2",1,tools.getAdminPluginSetting([
-    {title:"开启友hahah",type: "switch",key: keySettingAppFriend}
-]))
+
 // 友链管理功能
 // 获取所有友链
 router.registerAdminRouter("GET","",function (context){
@@ -205,4 +214,23 @@ router.registerAdminRouter("PUT","/:id",function (context){
 // 删除友链
 router.registerAdminRouter("DELETE","/:id",function (context){
     database.adminDeleteObject(context,dbFriend,"_id")
+})
+// 发送友链通知
+router.registerAdminRouter("PUT","/:id/notification",function (context){
+    // 获取id
+    let id = tools.str2objectId(context.Param("id"))
+    if (id.IsZero()){
+        router.response.ResponseBadRequest(context,"id格式错误")
+    } else {
+        // 查找用户的邮箱信息
+        database.newDb(dbFriend).FindOne({ filter: {_id:id}  },function (err,data){
+            if (err==null){
+                let body = "你好，你的友链已成功通过审核，<a href='" + tools.getSetting(keyServer) + "/more/friend'>点击这里</a>查看所有友链。<br>本邮件由系统直接发出，请勿直接回复"
+                mail.sendMail([data.email],"友链申请成功通知",body)
+                router.response.ResponseCreated(context,{id:id.String()})
+            } else {
+                router.response.ResponseNotFound(context,"没有找到用户信息")
+            }
+        })
+    }
 })

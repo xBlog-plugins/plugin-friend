@@ -176,7 +176,6 @@ router.registerAdminRouter("POST","",function (context) {
                 router.response.ResponseServerError(context)
             }
         })
-        router.response.ResponseOk(context,friend)
     } else {
         router.response.ResponseBadRequest(context,"请检查名字、网址是否填写并正确！")
     }
@@ -197,13 +196,11 @@ router.registerAdminRouter("PUT","/:id",function (context){
         if (tools.verifyField(param.description)) set.description = param.description
         // 获取id
         let filter = {"_id":{"$in":tools.string2objetIdArray(id,",")}}
-        tools.log(set)
         // 更新数据
         database.newDb(dbFriend).UpdateMany({update: {"$set":set},filter},function (err,res){
             if (err==null){
                 router.response.ResponseCreated(context,param)
             } else {
-                tools.log(err)
                 router.response.ResponseServerError(context)
             }
         })

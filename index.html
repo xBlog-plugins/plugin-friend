@@ -244,7 +244,7 @@
             rules: { // 验证界面
                 name: [{ required: true, message: '名字不能为空' }],
                 site: [{ required: true, message: '网站地址不能为空' }],
-                email: [{ validator: (rule, value, callback) => this.tools.checkEmail(value) ? callback() : callback(new Error('邮箱地址不正确')) }]
+                email: [{ required: true, message: '邮箱地址为空' }]
             },
             net: {}
         },

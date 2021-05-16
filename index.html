@@ -1,139 +1,28 @@
 <style>
-    #app {
-        display: flex;
-        justify-content: center;
-        margin-top: 10px;
+    #app{display:flex;justify-content:center;margin-top:10px}
+    #app .links a{text-decoration:none}
+    .links .userimg{transition:all .3s}
+    .links .userimg:hover{transform:rotate(45deg)}
+    .el-input.el-input--prefix{margin-top:10px}
+    .post blockquote{background-color:#fbf9f9;padding:5px 25px 5px 5px;margin:0 0 5px;border-radius:3px;position:relative;border:1px solid #e3e8e8}
+    .post .blo{position:absolute;display:block;right:5px;top:5px;color:#999}
+    .post .post-body .links ul li:hover{background:rgba(230,244,250,.5)}
+    .content a:hover{border-bottom:0!important}
+    #content{width:772px}
+    .post{position:relative;padding:40px;background:#fff;margin-bottom:40px;border-radius:5px}
+    .post-header{margin-bottom:20px}
+    .posts-expand .post-title,.posts-expand .post-title-link{color:#444;font-size:25px;font-weight:700;text-align:center}
+    .posts-expand .post-title-description{text-align:center;color:#999}
+    @media (min-width:992px){.posts-expand .post-body{text-align:justify}
     }
-    #app .links a{
-        text-decoration: none;
-    }
-
-    .links .userimg {
-        transition: all .3s;
-    }
-
-    .links .userimg:hover {
-        transform: rotate(45deg);
-    }
-
-    .el-input.el-input--prefix {
-        margin-top: 10px;
-    }
-
-    .post blockquote {
-        background-color: #fbf9f9;
-        padding: 5px 25px 5px 5px;
-        margin: 0 0 5px;
-        border-radius: 3px;
-        position: relative;
-        border: 1px solid #e3e8e8;
-    }
-
-    .post .blo {
-        position: absolute;
-        display: block;
-        right: 5px;
-        top: 5px;
-        color: #999;
-    }
-
-    .post .post-body .links ul li:hover {
-        background: rgba(230, 244, 250, .5);
-    }
-
-    .content a:hover {
-        border-bottom: 0 !important;
-    }
-
-    #content {
-        width: 772px;
-    }
-    .post {
-        position: relative;
-        padding: 40px;
-        background: #fff;
-        margin-bottom: 40px;
-        border-radius: 5px;
-    }
-
-    .post-header {
-        margin-bottom: 20px;
-    }
-
-    .posts-expand .post-title, .posts-expand .post-title-link {
-        color: #444;
-        font-size: 25px;
-        font-weight: 700;
-        text-align: center;
-    }
-
-    .posts-expand .post-title-description {
-        text-align: center;
-        color: #999999;
-    }
-
-    @media (min-width: 992px) {
-        .posts-expand .post-body {
-            text-align: justify;
-        }
-    }
-
-    .post-body {
-        font-family: "PingFang SC", "Microsoft YaHei", Lato, sans-serif;
-    }
-
-    .post .post-body .links ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        overflow: hidden;
-    }
-
-    .post .post-body .links ul li {
-        float: left;
-        width: 50%;
-        position: relative;
-        transition: all .3s ease-out;
-        border-radius: 5px;
-        list-style: none;
-    }
-
-    .post .post-body .links ul li a {
-        display: block;
-        padding: 0 10px 0 90px;
-        height: 90px;
-        color: #555;
-    }
-
-    .post .post-body .links ul li a img {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        cursor: pointer;
-        margin: 0;
-        border: 0;
-    }
-
-    .post .post-body .links ul li a h4 {
-        padding-top: 20px;
-        font-size: 16px;
-    }
-
-    .post .post-body .links ul li a h4, .post .post-body .links ul li a p {
-        cursor: pointer;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        margin: 0;
-    }
-
-    .post .post-body .links ul li a p {
-        margin: 10px 0;
-        line-height: 24px;
-    }
+    .post-body{font-family:"PingFang SC","Microsoft YaHei",Lato,sans-serif}
+    .post .post-body .links ul{list-style:none;padding:0;margin:0;overflow:hidden}
+    .post .post-body .links ul li{float:left;width:50%;position:relative;transition:all .3s ease-out;border-radius:5px;list-style:none}
+    .post .post-body .links ul li a{display:block;padding:0 10px 0 90px;height:90px;color:#555}
+    .post .post-body .links ul li a img{width:60px;height:60px;border-radius:50%;position:absolute;top:15px;left:15px;cursor:pointer;margin:0;border:0}
+    .post .post-body .links ul li a h4{padding-top:20px;font-size:16px}
+    .post .post-body .links ul li a h4,.post .post-body .links ul li a p{cursor:pointer;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;margin:0}
+    .post .post-body .links ul li a p{margin:10px 0;line-height:24px}
 </style>
 <div id="app">
     <div id="content" class="content">

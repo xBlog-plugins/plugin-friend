@@ -15,6 +15,8 @@ const keyFriendName = "friend_name"
 const keyFriendDec = "friend_dec"
 const keyFriendLink = "friend_link"
 const keyFriendAvatar = "friend_avatar"
+// 背景
+const keyBackground = "friend_img"
 
 // 获取所有友链
 router.registerRouter("GET","",function(context){
@@ -79,19 +81,24 @@ router.registerRouter("POST","",function (context){
 })
 // 友人帐界面
 widget.addPage({
-    background:"",
+    background: tools.getSetting(keyBackground),
     file:"index.html",
     headMeta: {
         title: "友人帐",
     },
     css: ["element"],
-    script: ["vue","element","jquery","xiaoyou"],
+    script: ["vue","element","jquery"],
     url: "",
     full: false,
     side: false
 },function (){
-    // 获取追番数据
-    return {}
+    // 友链设置
+    return {
+        name: tools.getSetting(keyFriendName),
+        dec: tools.getSetting(keyFriendDec),
+        link: tools.getSetting(keyFriendLink),
+        avatar: tools.getSetting(keyFriendAvatar),
+    }
 })
 
 // 添加友人帐设置界面

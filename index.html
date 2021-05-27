@@ -51,14 +51,14 @@
                     </div>
                     <el-divider> </el-divider>
                     <blockquote>
-<!--                        <font-awesome-icon class="blo" icon="info-circle"/>-->
-<!--                        <p>-->
-<!--                            本站信息<br>-->
-<!--                            名称:${ settingFriend.name }<br>-->
-<!--                            描述:${ settingFriend.dec }<br>-->
-<!--                            网址:${ settingFriend.link }<br>-->
-<!--                            头像:${ settingFriend.avatar }<br>-->
-<!--                        </p>-->
+                        <i class="fa fa-info-circle"></i>
+                        <p>
+                            本站信息<br>
+                            名称:{{ .name }}<br>
+                            描述:{{ .dec }}<br>
+                            网址:{{ .link }}<br>
+                            头像:{{ .avatar }}<br>
+                        </p>
                         <p>
                             友链申请要求<br>
                             1.申请时请先加上本站的连接(〃'▽'〃)<br>
@@ -116,53 +116,5 @@
     </div>
 </div>
 <script>
-    const app = new Vue({
-        el: '#app',
-        // 配置解析，避免和Go的模板渲染产生冲突
-        delimiters: ['${', '}'],
-        data: {
-            centerDialogVisible: false,
-            friends: [],
-            friend: {
-                name: '',
-                site: '',
-                dec: '',
-                avatar: '',
-                email: ''
-            },
-            rules: { // 验证界面
-                name: [{ required: true, message: '名字不能为空' }],
-                site: [{ required: true, message: '网站地址不能为空' }],
-                email: [{ required: true, message: '邮箱地址为空' }]
-            },
-            net: {}
-        },
-        mounted () {
-            this.net = new Net("http://127.0.0.1:2333/api/v3/")
-            this.getFriends()
-        },
-        methods:{
-            getFriends(){
-                this.net.request("plugins/friends","GET").then((data)=>{
-                    this.friends = data
-                })
-            },
-            // 提交友链申请请求
-            submitFriend () {
-                // 先判断验证是否通过
-                this.$refs.friend.validate((ok) => {
-                    if (ok) {
-                        // this.$store.dispatch('more/submitFriend', this.friend).then(() => {
-                        //     this.$alert('申请成功，请等待站长审核，审核通过后系统会自动发送邮件通知你!', '申请成功', {
-                        //         confirmButtonText: '确定'
-                        //     })
-                        //     // 清除申请内容
-                        //     this.friend = { name: '', site: '', dec: '', avatar: '', email: '' }
-                        // }).catch(msg => this.$message.error(msg))
-                        // this.centerDialogVisible = false
-                    }
-                })
-            }
-        }
-    });
+    new Vue({el:'#app',delimiters:['${','}'],data:{centerDialogVisible:false,friends:[],friend:{name:'',site:'',dec:'',avatar:'',email:''},rules:{name:[{required:true,message:'名字不能为空'}],site:[{required:true,message:'网站地址不能为空'}],email:[{required:true,message:'邮箱地址为空'}]}},mounted(){xy.net.server='/api/v3/';this.getFriends()},methods:{getFriends(){xy.net.request("plugins/friends","GET").then((data)=>{this.friends=data})},submitFriend(){this.$refs.friend.validate((ok)=>{if(ok){if(!xy.validate.checkEmail(this.friend.email)){this.$message.error('邮箱格式错误');return}xy.net.request("plugins/friends","POST",this.friend).then(()=>{this.$alert('申请成功，请等待站长审核，审核通过后系统会自动发送邮件通知你!','申请成功',{confirmButtonText:'确定'});this.friend={name:'',site:'',dec:'',avatar:'',email:''}}).catch(msg=>this.$message.error(msg));this.centerDialogVisible=false}})}}});
 </script>

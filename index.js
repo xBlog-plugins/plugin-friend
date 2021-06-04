@@ -9,7 +9,7 @@ const dbFriend = "friend"
 // 管理员邮箱
 const keyAdminEmail = "site_email"
 // api地址
-const keyServer = 'site_web_server'
+const keyServer = 'site_api_server'
 // 友链名字
 const keyFriendName = "friend_name"
 const keyFriendDec = "friend_dec"

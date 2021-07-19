@@ -103,12 +103,12 @@ widget.addPage({
 
 // 添加友人帐设置界面
 widget.addSetting("友链管理",2,"friend")
-widget.addSetting("友链设置",1,tools.getAdminPluginSetting([
+widget.addSetting("友链设置",1,[
     {title:"友链名字",type: "input",key: keyFriendName},
     {title:"友链介绍",type: "input",key: keyFriendDec},
     {title:"友链地址",type: "input",key: keyFriendLink},
     {title:"友链头像",type: "upload",key: keyFriendAvatar}
-]))
+])
 
 // 友链管理功能
 // 获取所有友链
